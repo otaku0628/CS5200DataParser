@@ -13,7 +13,7 @@ AirbnbListing (CSV Format): https://public.opendatasoft.com/explore/dataset/airb
 
 ## SQL Schema
 
-![SQL_Schema](./readme_images/Trip Planning Assistant.png)
+![SQL_Schema](./readme_images/SQL_Schema.png)
 
 ## What It Does
 

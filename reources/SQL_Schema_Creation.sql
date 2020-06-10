@@ -16,11 +16,11 @@ CREATE SCHEMA IF NOT EXISTS `trip_planning_assistant` DEFAULT CHARACTER SET utf8
 USE `trip_planning_assistant` ;
 
 -- -----------------------------------------------------
--- Table `trip_planning_assistant`.`yelp_buisness`
+-- Table `trip_planning_assistant`.`business_overview`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `trip_planning_assistant`.`yelp_buisness` ;
+DROP TABLE IF EXISTS `trip_planning_assistant`.`business_overview` ;
 
-CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`yelp_buisness` (
+CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_overview` (
   `buisness_id` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `address` VARCHAR(255) NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`yelp_buisness` (
   PRIMARY KEY (`buisness_id`))
 ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `buisness_id_UNIQUE` ON `trip_planning_assistant`.`yelp_buisness` (`buisness_id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `buisness_id_UNIQUE` ON `trip_planning_assistant`.`business_overview` (`buisness_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_attribute` (
   PRIMARY KEY (`uuid`),
   CONSTRAINT `fk_business_attribute_yelp_buisness`
     FOREIGN KEY (`business_id`)
-    REFERENCES `trip_planning_assistant`.`yelp_buisness` (`buisness_id`)
+    REFERENCES `trip_planning_assistant`.`business_overview` (`buisness_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_hour` (
   PRIMARY KEY (`uuid`),
   CONSTRAINT `fk_business_hour_yelp_buisness1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `trip_planning_assistant`.`yelp_buisness` (`buisness_id`)
+    REFERENCES `trip_planning_assistant`.`business_overview` (`buisness_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_checkin` (
   PRIMARY KEY (`uuid`),
   CONSTRAINT `fk_business_checkin_yelp_buisness1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `trip_planning_assistant`.`yelp_buisness` (`buisness_id`)
+    REFERENCES `trip_planning_assistant`.`business_overview` (`buisness_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_business_checkin_user1`
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_tips` (
   PRIMARY KEY (`uuid`),
   CONSTRAINT `fk_business_tips_yelp_buisness1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `trip_planning_assistant`.`yelp_buisness` (`buisness_id`)
+    REFERENCES `trip_planning_assistant`.`business_overview` (`buisness_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_business_tips_user1`
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_review` (
   PRIMARY KEY (`review_id`),
   CONSTRAINT `fk_business_review_yelp_buisness1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `trip_planning_assistant`.`yelp_buisness` (`buisness_id`)
+    REFERENCES `trip_planning_assistant`.`business_overview` (`buisness_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_business_review_user1`
@@ -210,8 +210,8 @@ DROP TABLE IF EXISTS `trip_planning_assistant`.`airbnb_host` ;
 CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`airbnb_host` (
   `host_id` VARCHAR(255) NOT NULL,
   `host_url` VARCHAR(255) NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  `since` DATE NOT NULL,
+  `name` VARCHAR(255) NULL,
+  `since` DATE NULL,
   `location` VARCHAR(255) NULL,
   `about` TEXT NULL,
   `response_time` VARCHAR(255) NULL,
@@ -424,13 +424,13 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`airbnb_rating` (
   `user_id` VARCHAR(255) NULL,
   `listing_id` VARCHAR(255) NOT NULL,
   `rating_score` INT NOT NULL,
-  `accuracy_score` INT NOT NULL,
-  `cleanliness_score` INT NOT NULL,
-  `checkin_score` INT NOT NULL,
-  `communication_score` INT NOT NULL,
-  `location_score` INT NOT NULL,
-  `value_score` INT NOT NULL,
-  `date` TIMESTAMP NOT NULL,
+  `accuracy_score` INT NULL,
+  `cleanliness_score` INT NULL,
+  `checkin_score` INT NULL,
+  `communication_score` INT NULL,
+  `location_score` INT NULL,
+  `value_score` INT NULL,
+  `date` TIMESTAMP NULL,
   PRIMARY KEY (`rating_id`),
   CONSTRAINT `fk_airbnb_review_user10`
     FOREIGN KEY (`user_id`)

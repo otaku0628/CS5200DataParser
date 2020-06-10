@@ -22,6 +22,9 @@ public class ReviewParsing {
   private static final String recordPrefixFormat = "^[\\d]+;.*$";
   private static final String recordFormat = "^(([^;]*);){5}([^;]*)$";
 
+  private static long successCount = 0;
+  private static long failureCount = 0;
+
   public static void main(String[] args) throws IOException {
 
     try (
@@ -40,13 +43,17 @@ public class ReviewParsing {
           if (csvRecord.toString().matches(recordFormat)) {
             // process valid record
             String[] record = csvRecord.toString().split(";", -1);
-            System.out.println(Arrays.toString(record));
             writeCsv(record, reviewIndex, "airbnbReview.csv");
+            successCount++;
           } else {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!! Invalid Record");
-          }
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!! Invalid Record !!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(Arrays.toString(csvRecord.toString().split(";", -1)).length());
+            System.out.println(Arrays.toString(csvRecord.toString().split(";", -1)));
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!! Invalid Record !!!!!!!!!!!!!!!!!!!!!!!");
+            failureCount++;          }
           // reset record and append new tempLine
           csvRecord = new StringBuilder(tempLine + "\n");
+          System.out.println("successCount: " + successCount + " | failureCount: " + failureCount);
         } else {
           // no record find, append tempLine into record
           csvRecord.append(tempLine).append("\n");
@@ -59,7 +66,10 @@ public class ReviewParsing {
         String[] record = csvRecord.toString().split(";");
         System.out.println(Arrays.toString(record));
         writeCsv(record, reviewIndex, "airbnbReview.csv");
+      } else {
+        failureCount++;
       }
+      System.out.println("successCount: " + successCount + " | failureCount: " + failureCount);
     }
   }
 
@@ -77,11 +87,15 @@ public class ReviewParsing {
         } else if (i == 3) {
           sb.append("null").append(";");
         } else {
-          sb.append("\"").append(record[i]).append("\"").append(";");
+          if ("".equals(record[i].trim())) { // solving "null" string type error issue
+            sb.append("null").append(";");
+          } else {
+            sb.append("\"").append(record[i]).append("\"").append(";");
+          }
         }
       }
     }
-    sb.deleteCharAt(sb.length() - 1).append("\n");
+    sb.deleteCharAt(sb.length() - 1).append("\r\n");
 
     final String fullPath = "src/main/resources/" + fileName;
     try (FileOutputStream fos = new FileOutputStream(fullPath, true); // append

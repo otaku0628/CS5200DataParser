@@ -3,7 +3,9 @@
 ## Summary
 
 This repo is the utils to process raw data into valid csv format for database 
-importing.
+importing. Main issues with Json format are the null field within nested Json, 
+and all default separators are used somewhere within the listing csv. Lacking 
+proper double quotes invalidates 15%~ of data.
 
 ## DataSource
 

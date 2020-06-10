@@ -28,3 +28,9 @@ YelpDataSet to individual csv file for loading into SQL database
 
 - Change corresponding input file path in relative class.
 
+## Process Result
+
+![r1](reources/processResult/airbnb_listing_result.png)
+![r2](reources/processResult/airbnb_review_result.png)
+![r3](reources/processResult/yelp_result.png)
+

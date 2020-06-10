@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`airbnb_host` (
   `about` TEXT NULL,
   `response_time` VARCHAR(255) NULL,
   `response_rate` DECIMAL(5,2) NULL,
-  `listing_count` INT NOT NULL,
+  `listing_count` INT NULL,
   `verification` VARCHAR(255) NULL,
   PRIMARY KEY (`host_id`))
 ENGINE = InnoDB;
@@ -232,7 +232,7 @@ DROP TABLE IF EXISTS `trip_planning_assistant`.`airbnb_listing` ;
 CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`airbnb_listing` (
   `listing_id` VARCHAR(255) NOT NULL,
   `host_id` VARCHAR(255) NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NULL,
   `summary` TEXT NULL,
   `space` TEXT NULL,
   `description` TEXT NULL,
@@ -268,8 +268,8 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`location_detail` (
   `zip_code` VARCHAR(255) NULL,
   `country_code` VARCHAR(255) NULL,
   `country` VARCHAR(255) NULL,
-  `latitude` DECIMAL(12,9) NOT NULL,
-  `longitude` DECIMAL(12,9) NOT NULL,
+  `latitude` DECIMAL(12,9) NULL,
+  `longitude` DECIMAL(12,9) NULL,
   PRIMARY KEY (`listing_id`),
   CONSTRAINT `fk_location_detail_airbnb_listing1`
     FOREIGN KEY (`listing_id`)
@@ -288,13 +288,13 @@ DROP TABLE IF EXISTS `trip_planning_assistant`.`room_detail` ;
 
 CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`room_detail` (
   `listing_id` VARCHAR(255) NOT NULL,
-  `property_type` VARCHAR(255) NOT NULL,
-  `room_type` VARCHAR(255) NOT NULL,
-  `accommodates` INT NOT NULL,
-  `bathroom_count` INT NOT NULL,
-  `bedroom_count` INT NOT NULL,
-  `bed_count` INT NOT NULL,
-  `bed_type` VARCHAR(255) NOT NULL,
+  `property_type` VARCHAR(255) NULL,
+  `room_type` VARCHAR(255) NULL,
+  `accommodates` INT NULL,
+  `bathroom_count` INT NULL,
+  `bedroom_count` INT NULL,
+  `bed_count` INT NULL,
+  `bed_type` VARCHAR(255) NULL,
   `amenities` TEXT NULL,
   `features` TEXT NULL,
   PRIMARY KEY (`listing_id`),
@@ -315,13 +315,13 @@ DROP TABLE IF EXISTS `trip_planning_assistant`.`reservation_detail` ;
 
 CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`reservation_detail` (
   `listing_id` VARCHAR(255) NOT NULL,
-  `daily_price` DECIMAL(11,2) NOT NULL,
+  `daily_price` DECIMAL(11,2) NULL,
   `weekly_price` DECIMAL(11,2) NULL,
   `monthly_price` DECIMAL(11,2) NULL,
   `deposit` DECIMAL(11,2) NULL,
   `cleaning_fee` DECIMAL(11,2) NULL,
-  `minimum_nights` INT NOT NULL,
-  `maximum_nights` INT NOT NULL,
+  `minimum_nights` INT NULL,
+  `maximum_nights` INT NULL,
   `cancellation_policy` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`listing_id`),
   CONSTRAINT `fk_reservation_detail_airbnb_listing1`
@@ -341,14 +341,14 @@ DROP TABLE IF EXISTS `trip_planning_assistant`.`review_detail` ;
 
 CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`review_detail` (
   `listing_id` VARCHAR(255) NOT NULL,
-  `review_count` INT NOT NULL,
-  `rating_score` INT NOT NULL,
-  `accuracy_score` INT NOT NULL,
-  `cleanliness_score` INT NOT NULL,
-  `checkin_score` INT NOT NULL,
-  `communication_score` INT NOT NULL,
-  `location_score` INT NOT NULL,
-  `value_score` INT NOT NULL,
+  `review_count` INT NULL,
+  `rating_score` INT NULL,
+  `accuracy_score` INT NULL,
+  `cleanliness_score` INT NULL,
+  `checkin_score` INT NULL,
+  `communication_score` INT NULL,
+  `location_score` INT NULL,
+  `value_score` INT NULL,
   PRIMARY KEY (`listing_id`),
   CONSTRAINT `fk_review_detail_airbnb_listing1`
     FOREIGN KEY (`listing_id`)

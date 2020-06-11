@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `trip_planning_assistant`.`business_review` (
   `business_id` VARCHAR(255) NOT NULL,
   `stars` DECIMAL(3,2) NOT NULL,
   `useful` INT NOT NULL,
-  `text` VARCHAR(255) NULL,
+  `text` TEXT NULL,
   `date` TIMESTAMP NOT NULL,
   PRIMARY KEY (`review_id`),
   CONSTRAINT `fk_business_review_yelp_buisness1`

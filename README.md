@@ -30,7 +30,7 @@ YelpDataSet to individual csv file for loading into SQL database
 
 ## Process Result
 
-![r1](reources/processResult/airbnb_listing_result.png)
-![r2](reources/processResult/airbnb_review_result.png)
+![r1](reources/processResult/airbnb_result.png)
+![r2](reources/processResult/sql_result.png)
 ![r3](reources/processResult/yelp_result.png)
 
